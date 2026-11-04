@@ -144,15 +144,17 @@ if kpi.visits == 0:
     st.warning("No visits match the selected filters.")
     st.stop()
 
-c = st.columns(7)
-c[0].metric("Visits", f"{int(kpi.visits):,}")
-c[1].metric("Revenue (food + alcohol)", money(kpi.food + kpi.alcohol))
-c[2].metric("Food", money(kpi.food))
-c[3].metric("Alcohol", money(kpi.alcohol))
-c[4].metric("Tips", money(kpi.tips))
-c[5].metric("Unique loyalty customers", f"{int(kpi.customers):,}")
-c[6].metric("Avg. check", f"${kpi.avg_check:,.2f}",
-            help=f"Loyalty visits: {kpi.loyalty_share:.1%}")
+row1 = st.columns(4)
+row1[0].metric("Visits", f"{int(kpi.visits):,}")
+row1[1].metric("Revenue (food + alcohol)", money(kpi.food + kpi.alcohol))
+row1[2].metric("Food", money(kpi.food))
+row1[3].metric("Alcohol", money(kpi.alcohol))
+
+row2 = st.columns(4)
+row2[0].metric("Tips", money(kpi.tips))
+row2[1].metric("Unique loyalty customers", f"{int(kpi.customers):,}")
+row2[2].metric("Avg. check", f"${kpi.avg_check:,.2f}")
+row2[3].metric("Loyalty visits", f"{kpi.loyalty_share:.1%}")
 
 tabs = st.tabs(["Restaurants", "Trends", "Food vs Alcohol", "Operations", "Servers"])
 
